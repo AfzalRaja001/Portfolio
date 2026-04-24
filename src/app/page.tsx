@@ -32,7 +32,7 @@ export default function Home() {
           screen="05 Coding Profile"
           title="Problems solved, at"
           titleEm="some cost to sleep."
-          sub="Live stats from LeetCode and the occasional ICPC. Dashboard designed next."
+          sub="Live stats from LeetCode and Codechef. Dashboard designed next."
         />
         <PlaceholderSection
           id="education"

@@ -98,7 +98,7 @@ function ExperienceEntry({ exp }: { exp: Experience }) {
           <span className="idx">01 · Brief</span>
           <div className="body">
             <h3>
-              Prepare 100+ pre-final students for placement season — in eight
+              Prepare 100+ pre-final students for placement season — in four
               weeks.
             </h3>
             <p>

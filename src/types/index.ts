@@ -84,3 +84,32 @@ export interface Project {
   highlights: ProjectHighlight[];
   stats: ProjectStat[];
 }
+
+export interface LeetCodeStats {
+  username: string;
+  profileUrl: string;
+  currentRating: number | null;
+  highestRating: number | null;
+  globalRank: number | null;
+  title: string | null;
+  contestsAttended: number;
+}
+
+export interface CodeChefStats {
+  username: string;
+  profileUrl: string;
+  currentRating: number | null;
+  highestRating: number | null;
+  globalRank: number | null;
+  title: string | null;
+  stars: number;
+}
+
+export interface GitHubStats {
+  username: string;
+  profileUrl: string;
+  publicRepos: number;
+  followers: number;
+  contributions: number | null;
+  commits: number | null;
+}
