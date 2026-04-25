@@ -15,8 +15,8 @@ const FALLBACK: Record<"leetcode" | "codechef" | "github", CodingProfileData> =
     leetcode: {
       handle: "Afzal__1",
       rank: "Knight",
-      rankNote: "Top 5%",
-      headline: { value: 1000, label: "Problems solved" },
+      rankNote: "Top 4.23%",
+      headline: { value: 670, label: "Problems solved" },
       stats: [
         { k: "Contest rating", v: "—" },
         { k: "Max rating", v: "—" },
@@ -24,9 +24,9 @@ const FALLBACK: Record<"leetcode" | "codechef" | "github", CodingProfileData> =
         { k: "Contests", v: "—" },
       ],
       breakdown: [
-        { k: "Easy", v: 320, of: 880 },
-        { k: "Medium", v: 540, of: 1850 },
-        { k: "Hard", v: 140, of: 800 },
+        { k: "Easy", v: 190, of: 938 },
+        { k: "Medium", v: 375, of: 2045 },
+        { k: "Hard", v: 105, of: 924 },
       ],
       url: "https://leetcode.com/Afzal__1/",
     },
@@ -34,7 +34,7 @@ const FALLBACK: Record<"leetcode" | "codechef" | "github", CodingProfileData> =
       handle: "afzal_001_001",
       rank: "3★",
       rankNote: "Division 2",
-      headline: { value: 200, label: "Problems solved" },
+      headline: { value: 180, label: "Problems solved" },
       stats: [
         { k: "Current rating", v: "—" },
         { k: "Max rating", v: "—" },
