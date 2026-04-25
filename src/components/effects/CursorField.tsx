@@ -429,6 +429,24 @@ export function CursorField({ mode = "constellation" }: Props) {
     window.addEventListener("mouseleave", onLeave);
     window.addEventListener("blur", onLeave);
 
+    // Expose a global hook so the theme toggle can ping us to re-read the palette
+    const w = window as unknown as {
+      __refreshPalette?: () => void;
+      __setBgMode?: (m: Mode) => void;
+    };
+    w.__refreshPalette = () => readPalette();
+    w.__setBgMode = (m: Mode) => {
+      modeRef.current = m;
+      initMode();
+    };
+
+    // Backup: watch <body> for data-palette / data-theme changes and re-read CSS vars
+    const paletteObserver = new MutationObserver(() => readPalette());
+    paletteObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["data-palette", "data-theme"],
+    });
+
     resize();
     raf = requestAnimationFrame(frame);
 
@@ -439,6 +457,9 @@ export function CursorField({ mode = "constellation" }: Props) {
       window.removeEventListener("touchmove", onMove);
       window.removeEventListener("mouseleave", onLeave);
       window.removeEventListener("blur", onLeave);
+      paletteObserver.disconnect();
+      delete w.__refreshPalette;
+      delete w.__setBgMode;
     };
   }, []);
 

@@ -7,13 +7,35 @@ export const metadata: Metadata = {
     "Mohammed Afzal Raja — pre-final year B.Tech student at IIIT Allahabad. Building things at the intersection of GenAI, full-stack engineering, and competitive programming.",
 };
 
+/**
+ * Inline blocking script that runs BEFORE the body paints.
+ * Reads ?theme= URL param + localStorage to pick a theme, then sets
+ * data-theme and data-palette on <body>. Without this, light/dark would
+ * flicker on first paint while React mounts.
+ */
+const themeInitScript = `
+(function () {
+  var THEME_TO_PALETTE = { light: 'sage', dark: 'plum' };
+  var theme = 'light';
+  try {
+    var url = new URL(location.href);
+    var qp = url.searchParams.get('theme');
+    var ls = localStorage.getItem('portfolio-theme');
+    if (qp === 'light' || qp === 'dark') theme = qp;
+    else if (ls === 'light' || ls === 'dark') theme = ls;
+  } catch (e) {}
+  document.body.setAttribute('data-theme', theme);
+  document.body.setAttribute('data-palette', THEME_TO_PALETTE[theme]);
+})();
+`;
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-palette="parchment">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -26,7 +48,12 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body data-palette="sage" data-theme="light">
+        <script
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

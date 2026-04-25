@@ -113,3 +113,104 @@ export interface GitHubStats {
   contributions: number | null;
   commits: number | null;
 }
+
+/* ===== Education ===== */
+export interface CourseEntry {
+  code: string;
+  name: string;
+  cg: number;
+}
+
+export interface EducationData {
+  institute: string;
+  shortName: string;
+  location: string;
+  degree: string;
+  major: string;
+  minor: string;
+  span: string;
+  status: string;
+  cgpa: number;
+  cgpaScale: number;
+  coursework: CourseEntry[];
+}
+
+/* ===== Achievements ===== */
+export interface AchievementMetric {
+  v: string;
+  k: string;
+}
+
+export interface Achievement {
+  id: string;
+  kind: string;
+  year: string;
+  title: string;
+  headline: string;
+  headlineNote: string;
+  sub: string;
+  metric: AchievementMetric;
+  weight: number;
+  accent: "warm" | "ink";
+}
+
+/* ===== Positions / Leadership ===== */
+export interface PositionPoint {
+  head: string;
+  body: string;
+}
+
+export interface PositionStat {
+  v: string;
+  k: string;
+}
+
+export interface Position {
+  id: string;
+  org: string;
+  orgShort: string;
+  orgGlyph: string;
+  where: string;
+  wing: string;
+  role: string;
+  period: string;
+  periodShort: string;
+  kind: string;
+  domain: string;
+  summary: string;
+  points: PositionPoint[];
+  stats: PositionStat[];
+  accent: "warm" | "ink";
+}
+
+/* ===== Coding profile (live + static merged) ===== */
+export interface CodingBreakdown {
+  k: string;
+  v: number;
+  of: number;
+}
+
+export interface CodingLanguage {
+  k: string;
+  v: number;
+}
+
+export interface CodingPlatformStat {
+  k: string;
+  v: string;
+}
+
+export interface CodingProfileData {
+  handle: string;
+  rank: string;
+  rankNote: string;
+  headline: { value: number; label: string };
+  stats: CodingPlatformStat[];
+  url: string;
+  /* LeetCode-only */
+  breakdown?: CodingBreakdown[];
+  /* CodeChef-only */
+  contests?: { played: number; top10: number };
+  /* GitHub-only */
+  languages?: CodingLanguage[];
+}

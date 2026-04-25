@@ -5,6 +5,23 @@ export const revalidate = 3600;
 
 const CODECHEF_USERNAME = process.env.CODECHEF_USERNAME || "";
 
+function starsFromRating(r: number | null): number {
+  if (r == null) return 0;
+  if (r < 1400) return 1;
+  if (r < 1600) return 2;
+  if (r < 1800) return 3;
+  if (r < 2000) return 4;
+  if (r < 2200) return 5;
+  if (r < 2500) return 6;
+  return 7;
+}
+
+function toInt(s: string | undefined): number | null {
+  if (!s) return null;
+  const n = parseInt(s.replace(/,/g, ""), 10);
+  return Number.isFinite(n) ? n : null;
+}
+
 export async function GET() {
   if (!CODECHEF_USERNAME) {
     return NextResponse.json(
@@ -19,7 +36,11 @@ export async function GET() {
       {
         headers: {
           "User-Agent":
-            "Mozilla/5.0 (compatible; PortfolioBot/1.0; +https://github.com/)",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+          Accept:
+            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "Accept-Language": "en-US,en;q=0.9",
+          "Accept-Encoding": "gzip, deflate, br",
         },
         next: { revalidate: 3600 },
       },
@@ -34,24 +55,15 @@ export async function GET() {
 
     const html = await res.text();
 
-    const currentRating =
-      parseInt(html.match(/<div class="rating-number"[^>]*>(\d+)/)?.[1] ?? "", 10) ||
-      null;
+    const currentRating = toInt(
+      html.match(/class="rating-number"[^>]*>\s*(\d+)/)?.[1],
+    );
+    const highestRating = toInt(html.match(/Highest Rating\s*(\d+)/i)?.[1]);
+    const globalRank = toInt(
+      html.match(/rating-ranks[\s\S]{0,200}?(\d+)\s*Global Rank/i)?.[1],
+    );
 
-    const highestRating =
-      parseInt(html.match(/\(Highest Rating\s*(\d+)\)/i)?.[1] ?? "", 10) || null;
-
-    const stars = (html.match(/<span class="rating"[^>]*>([★]+)<\/span>/)?.[1] ?? "")
-      .length;
-
-    const globalRankRaw =
-      html.match(
-        /<strong>([\d,]+|-)<\/strong>\s*<span[^>]*>\s*Global Rank/i,
-      )?.[1] ?? "";
-    const globalRank =
-      globalRankRaw && globalRankRaw !== "-"
-        ? parseInt(globalRankRaw.replace(/,/g, ""), 10)
-        : null;
+    const stars = starsFromRating(currentRating);
 
     const data: CodeChefStats = {
       username: CODECHEF_USERNAME,
