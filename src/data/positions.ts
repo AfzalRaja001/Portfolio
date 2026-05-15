@@ -81,7 +81,7 @@ export const POSITIONS: Position[] = [
     role: "Executive · Events & Management",
     period: "2025",
     periodShort: "Annual summit",
-    kind: "Entrepreneurship",
+    kind: "E-Summit",
     domain: "Events",
     summary:
       "Stepped up from volunteer to executive — leading a slice of the events team for the annual entrepreneurship summit and owning outcomes, not just tasks.",

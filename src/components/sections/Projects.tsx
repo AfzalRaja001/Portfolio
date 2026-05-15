@@ -90,94 +90,100 @@ function ProjectCard({
           </div>
         </header>
 
-        <div className="proj-title-block">
-          <div className="proj-kicker">{project.tag}</div>
-          <h3 className="proj-title">{project.name}</h3>
-          <p className="proj-tagline">{project.tagline}</p>
-        </div>
+        <div className="proj-main">
+          <div className="proj-left">
+            <div className="proj-title-block">
+              <div className="proj-kicker">{project.tag}</div>
+              <h3 className="proj-title">{project.name}</h3>
+              <p className="proj-tagline">{project.tagline}</p>
+            </div>
 
-        <ScreenshotFrame project={project} />
-
-        <div className="proj-body">
-          <div className="proj-highlights">
-            {project.highlights.map((h) => (
-              <div className="proj-hl" key={h.k}>
-                <span className="proj-hl-k">{h.k}</span>
-                <div className="proj-hl-body">
-                  <h4>{h.t}</h4>
-                  <p>{h.body}</p>
-                </div>
-              </div>
-            ))}
+            <ScreenshotFrame project={project} />
           </div>
 
-          <aside className="proj-aside">
-            <div className="proj-aside-row">
-              <span className="k">Role</span>
-              <span className="v">{project.role}</span>
-            </div>
-            <div className="proj-aside-row">
-              <span className="k">Shipped</span>
-              <span className="v">{project.year}</span>
-            </div>
-
-            <div className="proj-stat-grid">
-              {project.stats.map((s) => (
-                <div className="proj-stat-cell" key={s.k}>
-                  <div className="sv">{s.v}</div>
-                  <div className="sk">{s.k}</div>
+          <div className="proj-right">
+            <div className="proj-highlights">
+              {project.highlights.map((h) => (
+                <div className="proj-hl" key={h.k}>
+                  <span className="proj-hl-k">{h.k}</span>
+                  <div className="proj-hl-body">
+                    <h4>{h.t}</h4>
+                    <p>{h.body}</p>
+                  </div>
                 </div>
               ))}
             </div>
 
-            <div className="proj-stack">
-              <div className="t">Stack</div>
-              <div className="tags">
-                {project.stack.map((t) => (
-                  <span
-                    key={t}
-                    className={`proj-tag ${project.stackPrim.includes(t) ? "prim" : ""}`.trim()}
-                  >
-                    {t}
-                  </span>
+            <aside className="proj-aside">
+              <div className="proj-aside-meta">
+                <div className="proj-aside-row">
+                  <span className="k">Role</span>
+                  <span className="v">{project.role}</span>
+                </div>
+                <div className="proj-aside-row">
+                  <span className="k">Shipped</span>
+                  <span className="v">{project.year}</span>
+                </div>
+              </div>
+
+              <div className="proj-stat-grid">
+                {project.stats.map((s) => (
+                  <div className="proj-stat-cell" key={s.k}>
+                    <div className="sv">{s.v}</div>
+                    <div className="sk">{s.k}</div>
+                  </div>
                 ))}
               </div>
-            </div>
 
-            <div className="proj-links">
-              {project.links.map((l) => {
-                const href = normalizeProjectHref(l.href);
-                const isPlaceholder = href === "#";
-                const isExternal = EXTERNAL_HREF_RE.test(href);
-
-                return (
-                  <a
-                    key={l.label}
-                    href={href}
-                    className={`proj-link ${l.kind} ${isPlaceholder ? "is-disabled" : ""}`.trim()}
-                    target={isExternal ? "_blank" : undefined}
-                    rel={isExternal ? "noopener noreferrer" : undefined}
-                    aria-disabled={isPlaceholder}
-                    onClick={isPlaceholder ? (e) => e.preventDefault() : undefined}
-                  >
-                    <span>{l.label}</span>
-                    <svg
-                      viewBox="0 0 12 12"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.4"
+              <div className="proj-stack">
+                <div className="t">Stack</div>
+                <div className="tags">
+                  {project.stack.map((t) => (
+                    <span
+                      key={t}
+                      className={`proj-tag ${project.stackPrim.includes(t) ? "prim" : ""}`.trim()}
                     >
-                      <path
-                        d="M3 9L9 3M4 3h5v5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </a>
-                );
-              })}
-            </div>
-          </aside>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="proj-links">
+                {project.links.map((l) => {
+                  const href = normalizeProjectHref(l.href);
+                  const isPlaceholder = href === "#";
+                  const isExternal = EXTERNAL_HREF_RE.test(href);
+
+                  return (
+                    <a
+                      key={l.label}
+                      href={href}
+                      className={`proj-link ${l.kind} ${isPlaceholder ? "is-disabled" : ""}`.trim()}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      aria-disabled={isPlaceholder}
+                      onClick={isPlaceholder ? (e) => e.preventDefault() : undefined}
+                    >
+                      <span>{l.label}</span>
+                      <svg
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.4"
+                      >
+                        <path
+                          d="M3 9L9 3M4 3h5v5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </a>
+                  );
+                })}
+              </div>
+            </aside>
+          </div>
         </div>
       </div>
     </article>

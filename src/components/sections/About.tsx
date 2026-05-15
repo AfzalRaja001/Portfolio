@@ -56,18 +56,17 @@ export function About() {
       <div className="about-grid">
         <div className="about-narrative">
           <h2>
-            I&apos;m a student who treats code like a <em>craft</em> — and
-            problems like puzzles worth losing sleep over.
+            A student who treats code like a <em>craft</em> and problems
+            like puzzles worth losing sleep over.
           </h2>
 
           <div className="about-para">
             <span className="idx">01</span>
             <p>
               I&apos;m <strong>Mohammed Afzal Raja</strong>, a pre-final year
-              B.Tech student at <strong>IIIT Allahabad</strong>, studying
-              Information Technology with a specialization in{" "}
-              <em style={{ color: "var(--ink)" }}>Business Informatics</em>.
-              My day usually starts with a Leetcode problem and ends somewhere
+              at <strong>IIIT Allahabad</strong> studying IT with a{" "}
+              <em style={{ color: "var(--ink)" }}>Business Informatics</em>{" "}
+              specialization. My day usually starts on Leetcode and ends
               inside a{" "}
               <span className="mark-accent"> model weight </span>
               or a half-written React component.
@@ -77,32 +76,28 @@ export function About() {
           <div className="about-para">
             <span className="idx">02</span>
             <p>
-              I lean into the places where <strong>algorithms</strong>,{" "}
-              <strong>AI</strong>, and <strong>good product craft</strong>{" "}
-              overlap — from writing tight Java for competitive programming to
-              shipping full-stack apps that feel deliberate. I care a lot about
-              performance, clean abstractions, and interfaces that respect the
-              user&apos;s time.
+              I work where <strong>algorithms</strong>, <strong>AI</strong>,
+              and <strong>good product craft</strong> overlap — tight Java for
+              CP, full-stack apps that feel deliberate. Performance, clean
+              abstractions, and interfaces that respect your time.
             </p>
           </div>
 
           <div className="about-para">
             <span className="idx">03</span>
             <p>
-              When I&apos;m not coding, I&apos;m usually reading papers on LLM
-              reasoning, breaking apart open-source repos to understand how
-              they work, or mentoring juniors through DSA. I&apos;m looking for
+              Off-clock, I&apos;m reading LLM papers, tearing apart
+              open-source repos, or mentoring juniors through DSA. Looking for
               a{" "}
               <span className="mark-accent"> summer &apos;27 internship </span>
-              where I can do serious engineering and learn from people
-              who&apos;ve built real systems.
+              to do serious engineering alongside people who&apos;ve built
+              real systems.
             </p>
           </div>
 
           <div className="about-signature">
             <span className="line" />
             <span>— Afzal</span>
-            <span className="loc">Allahabad · IN</span>
           </div>
         </div>
 

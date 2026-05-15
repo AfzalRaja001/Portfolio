@@ -124,90 +124,7 @@ function CountUp({
   return <>{v.toLocaleString()}</>;
 }
 
-/* Deterministic 26-week heatmap from a seed */
-function makeHeat(seed: number): number[][] {
-  let s = seed >>> 0;
-  const rnd = () => {
-    s = (s + 0x6d2b79f5) | 0;
-    let t = s;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-  const weeks = 26;
-  const out: number[][] = [];
-  for (let w = 0; w < weeks; w++) {
-    const col: number[] = [];
-    const streakBias = rnd() < 0.15 ? 0.85 : 0;
-    for (let d = 0; d < 7; d++) {
-      const weekday = d >= 1 && d <= 5 ? 0.25 : 0;
-      const r = rnd() + streakBias + weekday;
-      let level = 0;
-      if (r > 1.7) level = 4;
-      else if (r > 1.3) level = 3;
-      else if (r > 0.9) level = 2;
-      else if (r > 0.55) level = 1;
-      col.push(level);
-    }
-    out.push(col);
-  }
-  return out;
-}
-
 /* ---------- Sub-components ---------- */
-
-function Heatmap({
-  seed,
-  accent,
-  visible,
-}: {
-  seed: number;
-  accent: string;
-  visible: boolean;
-}) {
-  const data = useMemo(() => makeHeat(seed), [seed]);
-  const total = data.flat().filter((v) => v > 0).length;
-  return (
-    <div className="cp-heat">
-      <div className="cp-heat-head">
-        <span className="k">Activity · last 26 weeks</span>
-        <span className="v">{total} active days</span>
-      </div>
-      <div
-        className="cp-heat-grid"
-        style={{ ["--cp-accent" as string]: accent } as React.CSSProperties}
-      >
-        {data.map((week, wi) => (
-          <div className="cp-heat-col" key={wi}>
-            {week.map((lvl, di) => {
-              const idx = wi * 7 + di;
-              return (
-                <span
-                  key={di}
-                  className={`cp-heat-cell lvl-${lvl}`}
-                  style={{
-                    transitionDelay: visible ? `${idx * 4}ms` : "0ms",
-                    opacity: visible ? 1 : 0,
-                    transform: visible ? "scale(1)" : "scale(0.4)",
-                  }}
-                />
-              );
-            })}
-          </div>
-        ))}
-      </div>
-      <div className="cp-heat-legend">
-        <span>Less</span>
-        <span className="cp-heat-cell lvl-0" />
-        <span className="cp-heat-cell lvl-1" />
-        <span className="cp-heat-cell lvl-2" />
-        <span className="cp-heat-cell lvl-3" />
-        <span className="cp-heat-cell lvl-4" />
-        <span>More</span>
-      </div>
-    </div>
-  );
-}
 
 function StatRow({ k, v }: { k: string; v: string }) {
   return (
@@ -225,7 +142,6 @@ function CodingCard({
   platform,
   mark,
   accent,
-  seed,
   data,
   offset = 0,
 }: {
@@ -234,7 +150,6 @@ function CodingCard({
   platform: "LeetCode" | "CodeChef" | "GitHub";
   mark: string;
   accent: string;
-  seed: number;
   data: CodingProfileData;
   offset?: number;
 }) {
@@ -364,8 +279,6 @@ function CodingCard({
             <StatRow key={s.k} k={s.k} v={s.v} />
           ))}
         </div>
-
-        <Heatmap seed={seed} accent={accent} visible={seen} />
 
         <a
           className="cp-cta"
@@ -524,7 +437,6 @@ export function CodingProfile() {
           platform="LeetCode"
           mark="LC"
           accent="oklch(0.72 0.16 60)"
-          seed={20240715}
           data={leetData}
           offset={0}
         />
@@ -534,7 +446,6 @@ export function CodingProfile() {
           platform="CodeChef"
           mark="CC"
           accent="oklch(0.62 0.14 35)"
-          seed={20240322}
           data={ccData}
           offset={36}
         />
@@ -544,7 +455,6 @@ export function CodingProfile() {
           platform="GitHub"
           mark="GH"
           accent="oklch(0.66 0.16 145)"
-          seed={20241103}
           data={ghData}
           offset={12}
         />
