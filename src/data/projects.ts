@@ -1,4 +1,9 @@
 import type { Project } from "@/types";
+import nodebaseScreenshot from "./images/Nodebase.png";
+import realEstateScreenshot from "./images/Real Estate.png";
+import sqlQueryAnalyzerScreenshot from "./images/SQL Query Analyzer.png";
+import collabPlatformScreenshot from "./images/Collab Platform.png";
+import startupFundingScreenshot from "./images/Startup Funding.png";
 
 export const PROJECTS: Project[] = [
   {
@@ -12,7 +17,7 @@ export const PROJECTS: Project[] = [
     year: "2025",
     status: "live",
     accent: "warm",
-    screenshot: null,
+    screenshot: nodebaseScreenshot.src,
     links: [
       { label: "Live", href: "https://nodebase-zeta.vercel.app", kind: "prim" },
       { label: "GitHub", href: "https://github.com/AfzalRaja001/Nodebase", kind: "ghost" },
@@ -63,7 +68,7 @@ export const PROJECTS: Project[] = [
     year: "2024",
     status: "live",
     accent: "cool",
-    screenshot: null,
+    screenshot: realEstateScreenshot.src,
     links: [
       { label: "Live", href: "https://real-estate-frontend-latest.onrender.com", kind: "prim" },
       { label: "API Docs", href: "https://real-estate-fastapi-latest.onrender.com/docs", kind: "ghost" },
@@ -172,7 +177,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     status: "wip",
     accent: "cool",
-    screenshot: null,
+    screenshot: sqlQueryAnalyzerScreenshot.src,
     links: [
       { label: "Live", href: "#", kind: "prim" },
       {
@@ -225,7 +230,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     status: "wip",
     accent: "cool",
-    screenshot: null,
+    screenshot: collabPlatformScreenshot.src,
     links: [
       { label: "Live", href: "#", kind: "prim" },
       {
@@ -384,7 +389,7 @@ export const PROJECTS: Project[] = [
     year: "2025",
     status: "live",
     accent: "warm",
-    screenshot: null,
+    screenshot: startupFundingScreenshot.src,
     links: [
       { label: "Live", href: "#", kind: "prim" },
       {

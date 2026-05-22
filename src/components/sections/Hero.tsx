@@ -85,11 +85,11 @@ export function Hero() {
   };
 
   return (
-    <section id="home" className="screen" data-screen-label="01 Home">
+    <section id="home" className="screen" data-screen-label="01 Home">  
       <div className="hero">
         <div className="kicker">
           <span className="accent-sq" />
-          <span>Portfolio · Vol. 01 · MMXXVI</span>
+          <span>Portfolio</span>
           <span className="rule" />
           <span>IIIT Allahabad</span>
         </div>
